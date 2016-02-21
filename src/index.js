@@ -1,10 +1,8 @@
 import cluster from 'cluster';
 import os from 'os';
 
+import processName from './process-name';
 import log from './log-factory';
-
-import processName_ from './process-name';
-export const processName = processName_;
 
 const defaultOptions = {
     numberOfWorkers: process.env.EXPRESS_CLUSTER_NUMBER_OF_WORKERS || os.cpus().length,
@@ -13,7 +11,7 @@ const defaultOptions = {
     logLevel: process.env.EXPRESS_CLUSTER_LOG_LEVEL || 'info'
 };
 
-export default (workerFunction, options = {}) => {
+const stabilityCluster = (workerFunction, options = {}) => {
     if (typeof workerFunction !== 'function') {
         throw new Error('workerFunction must be supplied.');
     }
@@ -26,3 +24,6 @@ export default (workerFunction, options = {}) => {
         require('./cluster-worker')(workerFunction, effectiveOptions);
     }
 };
+stabilityCluster.processName = processName;
+
+export default stabilityCluster;
