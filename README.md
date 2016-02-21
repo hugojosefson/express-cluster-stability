@@ -19,16 +19,35 @@ npm install --save express-stability-cluster
 
 ## Usage
 
-Simple and fully functional example.
+Call this module with a `workerFunction`. Make sure to do all the work inside the worker function, so the master doesn't
+waste any time on things the workers will do.
+
+### Examples
+
+Minimal noop example.
 
 ```js
 import express from 'express';
 import stabilityCluster from 'express-stability-cluster';
 
-const app = express();
-app.get('/', (req, res) => res.send(`Hello world.`));
+stabilityCluster(() => express().listen(8000));
+```
 
-stabilityCluster(({log}) => app.listen(8000, () => log(`App ready at http://localhost:8000/`)));
+Fully functional example, with simple logging in each worker.
+
+```js
+import express from 'express';
+import stabilityCluster from 'express-stability-cluster';
+
+stabilityCluster(({log}) => {
+
+    const app = express();
+    app.get('/', (req, res) => res.send(`Hello world.`));
+
+    return app.listen(8000, () => {
+        log(`App ready at http://localhost:8000/`);
+    });
+});
 ```
 
 ## API
@@ -50,18 +69,20 @@ The module `express-stability-cluster` is a function which takes two arguments:
        Default is environment variable `EXPRESS_CLUSTER_WORKER_KILL_TIMEOUT`, or `30000` (ms).
     * `logger` - Function which takes a level string as argument, and returns a function which logs
       `message` and any extra arguments to that level. Default is a function which uses
-      `console.log` and `console.error`; see *Full example* below.
+      `console.log` and `console.error`; see *Full config options example* below.
 
 The `workerFunction` will be called with the effective options used, as one argument. That object will
 also have a property `log`, which uses `logger` to log messages. `log` is an object with one property
 (function) for each possible log level. These are:
 
-  * `log.fatal(message, ...rest)`
-  * `log.error(message, ...rest)`
-  * `log.warn(message, ...rest)`
-  * `log.info(message, ...rest)`
-  * `log.debug(message, ...rest)`
-  * `log.trace(message, ...rest)`
+```js
+log.fatal(message, ...rest);
+log.error(message, ...rest);
+log.warn(message, ...rest);
+log.info(message, ...rest);
+log.debug(message, ...rest);
+log.trace(message, ...rest);
+```
 
 `log()` itself is also a function, aliased to `log.info()`.
 
@@ -94,12 +115,16 @@ import cluster from 'cluster';
 import os from 'os';
 import {processName} from 'express-stability-cluster';
 
-const app = express();
-app.get('/', (req, res) => res.send(`Hello world. This is worker ${cluster.worker.id}.\n`));
-
 stabilityCluster(({log}) => {
     log(`Reporting for duty.`);
-    return app.listen(8000, () => log(`App ready at http://localhost:8000/`));
+
+    const app = express();
+    app.get('/', (req, res) => res.send(`Hello world. This is worker ${cluster.worker.id}.\n`));
+
+    const port = process.env.PORT || 8000;
+    return app.listen(port, () => {
+        log(`App ready at http://localhost${port === 80 ? '' : `:${port}`}/`);
+    });
 }, {
     numberOfWorkers: os.cpus().length,        // this is the default
     handleUncaughtException: true,            // this is the default
