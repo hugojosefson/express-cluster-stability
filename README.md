@@ -6,6 +6,8 @@ Stability and multi-core performance for your Express app, via the built-in stab
 This module is configurable, and has sane defaults for running your Express app stable and
 fast.
 
+[![Build Status](https://travis-ci.org/hugojosefson/express-stability-cluster.svg?branch=master)](https://travis-ci.org/hugojosefson/express-stability-cluster)
+
 ## Prerequisites
 
 * Node.js 4 LTS or later; install via
