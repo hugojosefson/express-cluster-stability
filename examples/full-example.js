@@ -1,9 +1,9 @@
 import express from 'express';
-import stabilityCluster from 'express-stability-cluster';
+import stabilityCluster from '../lib';
 
 import cluster from 'cluster';
 import os from 'os';
-import {processName} from 'express-stability-cluster';
+import {processName} from '../lib';
 
 stabilityCluster(({log}) => {
     log(`Reporting for duty.`);

@@ -4,10 +4,11 @@
   "description": "Stability and multi-core performance for your Express app, via the built-in stable Node.js cluster API.",
   "main": "lib/index.js",
   "scripts": {
-    "start": "node lib",
-    "postinstall": "npm run compile",
-    "compile": "rm -rf lib; babel -d lib/ src/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run compile-examples && npm install express && node --harmony examples-es5/full-example",
+    "prepublish": "npm run compile",
+    "compile": "rm -rf lib; babel src -d lib",
+    "compile-examples": "rm -rf examples-es5; babel examples -d examples-es5",
+    "test": "npm run compile && npm run compile-examples"
   },
   "keywords": [
     "cluster",

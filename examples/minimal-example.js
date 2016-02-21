@@ -1,4 +1,4 @@
 import express from 'express';
-import stabilityCluster from 'express-stability-cluster';
+import stabilityCluster from '../lib';
 
 stabilityCluster(() => express().listen(8000));
