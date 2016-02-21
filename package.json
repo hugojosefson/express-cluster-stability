@@ -1,0 +1,42 @@
+{
+  "name": "express-stability-cluster",
+  "version": "0.1.0",
+  "description": "Stability and multi-core performance for your Express app, via the built-in stable Node.js cluster API.",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "node lib",
+    "postinstall": "npm run compile",
+    "compile": "rm -rf lib; babel -d lib/ src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cluster",
+    "express",
+    "stability",
+    "stable",
+    "uptime",
+    "master",
+    "worker",
+    "node",
+    "processes"
+  ],
+  "author": "Hugo Josefson <hugo@josefson.org>",
+  "repository": "hugojosefson/express-stability-cluster",
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-preset-es2015": "^6.5.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "add-module-exports"
+    ]
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "license": "MIT"
+}
