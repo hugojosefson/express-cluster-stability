@@ -19,7 +19,7 @@ export default (workerFunction, options = {}) => {
     }
 
     const effectiveOptions = Object.assign({}, defaultOptions, options);
-    effectiveOptions.log = log(effectiveOptions.logger);
+    effectiveOptions.log = log(effectiveOptions.logLevel, effectiveOptions.logger);
     if (cluster.isMaster) {
         require('./cluster-master')(effectiveOptions);
     } else {
