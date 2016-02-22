@@ -6,6 +6,10 @@ Stability and multi-core performance for your Express app, via the built-in stab
 This module is configurable, and has sane defaults for running your Express app stable and
 fast.
 
+Star this now, so you remember
+[`express-cluster-stability`](https://npmjs.com/package/express-cluster-stability) when you need
+it.
+
 [![Build Status](https://travis-ci.org/hugojosefson/express-cluster-stability.svg?branch=master)](https://travis-ci.org/hugojosefson/express-cluster-stability)
 
 ## Prerequisites
