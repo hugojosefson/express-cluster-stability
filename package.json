@@ -1,7 +1,7 @@
 {
   "name": "express-stability-cluster",
   "version": "0.2.0",
-  "description": "Stability and multi-core performance for your Express app, via the built-in stable Node.js cluster API.",
+  "description": "Renamed to express-cluster-stability.",
   "main": "lib/index.js",
   "scripts": {
     "start": "npm run compile-examples && npm install express && node --harmony examples-es5/full-example",
