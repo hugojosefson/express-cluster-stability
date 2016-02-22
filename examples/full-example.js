@@ -18,6 +18,8 @@ clusterStability(({log}) => {
 }, {
     numberOfWorkers: os.cpus().length,        // this is the default
     handleUncaughtException: true,            // this is the default
+    workerRespawnDelay: 1000,                 // this is the default
+    workerKillTimeout: 30000,                 // this is the default
     logLevel: 'info',                         // this is the default
     logger: level => (message, ...rest) => {  // this is the default
         if (['fatal', 'error', 'warn'].includes(level.toLowerCase())) {

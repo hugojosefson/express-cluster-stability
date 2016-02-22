@@ -1,12 +1,16 @@
 # Changelog for `express-cluster-stability`
 
+## v1.1.2
+
+  * **Docs:** Add `workerRespawnDelay` and `workerKillTimeout` to full example.
+
 ## v1.1.1
 
   * **Docs:** Add this `CHANGELOG.md`.
 
 ## v1.1.0
 
-  * **Feature:** Don't spawn workers too fast. 
+  * **Feature:** Don't spawn workers too fast.
 
 ## v1.0.0
 
