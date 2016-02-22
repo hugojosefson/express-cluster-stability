@@ -1,6 +1,9 @@
-const cluster = require('cluster');
+import cluster from 'cluster';
+import queueFactory from './queue-factory';
 
-export default ({numberOfWorkers, workerKillTimeout, log}) => {
+export default ({numberOfWorkers, workerRespawnDelay, workerKillTimeout, log}) => {
+    const queue = queueFactory(workerRespawnDelay);
+
     /**
      * worker.id -> timeout id for killing it
      */
@@ -19,7 +22,8 @@ export default ({numberOfWorkers, workerKillTimeout, log}) => {
         }
     };
 
-    const forkNewWorker = () => {
+    const forkNewWorker = () => queue.push(forkNewWorkerNow);
+    const forkNewWorkerNow = () => {
         log('Forking a new worker...');
         const worker = cluster.fork();
         worker.on('message', messageHandler(worker));
@@ -42,6 +46,6 @@ export default ({numberOfWorkers, workerKillTimeout, log}) => {
 
     // Fork workers.
     for (var i = 0; i < numberOfWorkers; i++) {
-        forkNewWorker();
+        forkNewWorkerNow();
     }
 };

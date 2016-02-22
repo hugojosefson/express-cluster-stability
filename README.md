@@ -67,6 +67,8 @@ The module `express-cluster-stability` is a function which takes two arguments:
        it, spin up a new worker in its place, and close the crashing one as cleanly as possible,
        killing it after `workerKillTimeout` ms if needed. Default is environment variable
        `EXPRESS_CLUSTER_HANDLE_UNCAUGHT_EXCEPTION`, or `true`.
+    * `workerRespawnDelay` - How long in ms between respawning each new worker. Default is
+       environment variable `EXPRESS_CLUSTER_WORKER_RESPAWN_DELAY`, or `1000` (ms).
     * `workerKillTimeout` - How long in ms after trying to shut down a worker nicely, to kill it.
        Default is environment variable `EXPRESS_CLUSTER_WORKER_KILL_TIMEOUT`, or `30000` (ms).
     * `logger` - Function which takes a level string as argument, and returns a function which logs
