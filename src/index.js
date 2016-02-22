@@ -26,5 +26,6 @@ const clusterStability = (workerFunction, options = {}) => {
     }
 };
 clusterStability.processName = processName;
+clusterStability.log = log(defaultOptions.logLevel);
 
 export default clusterStability;

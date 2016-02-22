@@ -54,6 +54,8 @@ clusterStability(({log}) => {
 
 ## API
 
+### Main function
+
 The module `express-cluster-stability` is a function which takes two arguments:
 
   * `workerFunction` - Mandatory. Function which will be run in each worker process. Receives the
@@ -74,6 +76,8 @@ The module `express-cluster-stability` is a function which takes two arguments:
     * `logger` - Function which takes a level string as argument, and returns a function which logs
       `message` and any extra arguments to that level. Default is a function which uses
       `console.log` and `console.error`; see *Full config options example* below.
+
+#### Worker function
 
 The `workerFunction` will be called with the effective options used, as one argument. That object will
 also have a property `log`, which uses `logger` to log messages. `log` is an object with one property
@@ -98,6 +102,24 @@ log entirely if the level is not relevant. For example:
 if (log.debug.enabled) {
   log.debug(calculateExpensivelyWhatToLog(req, res));
 }
+```
+
+### Other exports
+
+This module also exports two extra utilities, which are available in all contexts:
+
+ * `processName` - The string `Master`, or `Worker ` + the worker id.
+ * `log` - A log function like the one you get in your worker function, but default configured.
+    The configuration incorporates any configuration environment variable. Useful for the master
+    process, or whenever you wish to accept the default `logLevel` and `logger`.
+
+Use them for example like this:
+
+```js
+import {log, processName} from 'express-cluster-stability';
+
+console.log(`${processName}: This is the same as the other line.`);
+log('This is the same as the other line.');
 ```
 
 ## Full config options example

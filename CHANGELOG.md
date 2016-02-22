@@ -1,5 +1,10 @@
 # Changelog for `express-cluster-stability`
 
+## v1.2.0
+
+  * **Feature:** Add extra export `log`.
+  * **Docs:** Document `processName` and `log` in `README.md`.
+
 ## v1.1.2
 
   * **Docs:** Add `workerRespawnDelay` and `workerKillTimeout` to full example.
