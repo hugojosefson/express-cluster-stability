@@ -11,7 +11,7 @@ const defaultOptions = {
     logLevel: process.env.EXPRESS_CLUSTER_LOG_LEVEL || 'info'
 };
 
-const stabilityCluster = (workerFunction, options = {}) => {
+const clusterStability = (workerFunction, options = {}) => {
     if (typeof workerFunction !== 'function') {
         throw new Error('workerFunction must be supplied.');
     }
@@ -24,6 +24,6 @@ const stabilityCluster = (workerFunction, options = {}) => {
         require('./cluster-worker')(workerFunction, effectiveOptions);
     }
 };
-stabilityCluster.processName = processName;
+clusterStability.processName = processName;
 
-export default stabilityCluster;
+export default clusterStability;

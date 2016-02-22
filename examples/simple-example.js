@@ -1,7 +1,7 @@
 import express from 'express';
-import stabilityCluster from '../lib';
+import clusterStability from '../lib';
 
-stabilityCluster(({log}) => {
+clusterStability(({log}) => {
 
     const app = express();
     app.get('/', (req, res) => res.send(`Hello world.`));

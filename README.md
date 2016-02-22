@@ -1,4 +1,4 @@
-# express-stability-cluster
+# express-cluster-stability
 
 Stability and multi-core performance for your Express app, via the built-in stable Node.js
 [cluster](https://nodejs.org/api/cluster.html#cluster_cluster) API.
@@ -6,7 +6,7 @@ Stability and multi-core performance for your Express app, via the built-in stab
 This module is configurable, and has sane defaults for running your Express app stable and
 fast.
 
-[![Build Status](https://travis-ci.org/hugojosefson/express-stability-cluster.svg?branch=master)](https://travis-ci.org/hugojosefson/express-stability-cluster)
+[![Build Status](https://travis-ci.org/hugojosefson/express-cluster-stability.svg?branch=master)](https://travis-ci.org/hugojosefson/express-cluster-stability)
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ fast.
 ## Install
 
 ```bash
-npm install --save express-stability-cluster
+npm install --save express-cluster-stability
 ```
 
 ## Usage
@@ -30,18 +30,18 @@ Minimal noop example.
 
 ```js
 import express from 'express';
-import stabilityCluster from 'express-stability-cluster';
+import clusterStability from 'express-cluster-stability';
 
-stabilityCluster(() => express().listen(8000));
+clusterStability(() => express().listen(8000));
 ```
 
 Fully functional example, with simple logging in each worker.
 
 ```js
 import express from 'express';
-import stabilityCluster from 'express-stability-cluster';
+import clusterStability from 'express-cluster-stability';
 
-stabilityCluster(({log}) => {
+clusterStability(({log}) => {
 
     const app = express();
     app.get('/', (req, res) => res.send(`Hello world.`));
@@ -54,7 +54,7 @@ stabilityCluster(({log}) => {
 
 ## API
 
-The module `express-stability-cluster` is a function which takes two arguments:
+The module `express-cluster-stability` is a function which takes two arguments:
 
   * `workerFunction` - Mandatory. Function which will be run in each worker process. Receives the
      effective options object as an argument, and MUST return a server with a `.close()` method.
@@ -104,20 +104,20 @@ All configuration options expanded to their default values.
 
 We also show how to use the `cluster` module directly to access the worker, and output its `id` as
 part of the web app response to a client. The string `Worker ${cluster.worker.id}` (or `Master`
-when applicable) is also available from the exported `processName` in `express-stability-cluster`.
+when applicable) is also available from the exported `processName` in `express-cluster-stability`.
 
 `logger` is a function which takes a level string as argument, and returns a function which logs
 `message` and any extra arguments to that level. The default implementation is shown in this exampe.
 
 ```js
 import express from 'express';
-import stabilityCluster from 'express-stability-cluster';
+import clusterStability from 'express-cluster-stability';
 
 import cluster from 'cluster';
 import os from 'os';
-import {processName} from 'express-stability-cluster';
+import {processName} from 'express-cluster-stability';
 
-stabilityCluster(({log}) => {
+clusterStability(({log}) => {
     log(`Reporting for duty.`);
 
     const app = express();

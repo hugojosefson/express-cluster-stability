@@ -1,11 +1,11 @@
 import express from 'express';
-import stabilityCluster from '../lib';
+import clusterStability from '../lib';
 
 import cluster from 'cluster';
 import os from 'os';
 import {processName} from '../lib';
 
-stabilityCluster(({log}) => {
+clusterStability(({log}) => {
     log(`Reporting for duty.`);
 
     const app = express();
