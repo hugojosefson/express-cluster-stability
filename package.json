@@ -1,6 +1,6 @@
 {
   "name": "express-cluster-stability",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Stability and multi-core performance for your Express app, via the built-in stable Node.js cluster API.",
   "main": "lib/index.js",
   "scripts": {
