@@ -122,7 +122,7 @@ Use them for example like this:
 ```js
 import {log, processName} from 'express-cluster-stability';
 
-console.log(`${processName}: This is the same as the other line.`);
+console.log(`INFO: ${processName}: This is the same as the other line.`);
 log('This is the same as the other line.');
 ```
 
@@ -163,9 +163,9 @@ clusterStability(({log}) => {
     logLevel: 'info',                         // this is the default
     logger: level => (message, ...rest) => {  // this is the default
         if (['fatal', 'error', 'warn'].includes(level.toLowerCase())) {
-            console.error(`${processName}: ${level.toUpperCase()}: ${message}`, ...rest);
+            console.error(`${level.toUpperCase()}: ${processName}: ${message}`, ...rest);
         } else {
-            console.log(`${processName}: ${level.toUpperCase()}: ${message}`, ...rest);
+            console.log(`${level.toUpperCase()}: ${processName}: ${message}`, ...rest);
         }
     }
 });

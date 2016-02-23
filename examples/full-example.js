@@ -23,9 +23,9 @@ clusterStability(({log}) => {
     logLevel: 'info',                         // this is the default
     logger: level => (message, ...rest) => {  // this is the default
         if (['fatal', 'error', 'warn'].includes(level.toLowerCase())) {
-            console.error(`${processName}: ${level.toUpperCase()}: ${message}`, ...rest);
+            console.error(`${level.toUpperCase()}: ${processName}: ${message}`, ...rest);
         } else {
-            console.log(`${processName}: ${level.toUpperCase()}: ${message}`, ...rest);
+            console.log(`${level.toUpperCase()}: ${processName}: ${message}`, ...rest);
         }
     }
 });

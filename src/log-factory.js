@@ -16,9 +16,9 @@ const atLeast = (min, level, fn) => levels[level] >= levels[min] ? Object.assign
 
 const defaultLogger = level => (message, ...rest) => {
     if (['fatal', 'error', 'warn'].includes(level.toLowerCase())) {
-        console.error(`${processName}: ${level.toUpperCase()}: ${message}`, ...rest);
+        console.error(`${level.toUpperCase()}: ${processName}: ${message}`, ...rest);
     } else {
-        console.log(`${processName}: ${level.toUpperCase()}: ${message}`, ...rest);
+        console.log(`${level.toUpperCase()}: ${processName}: ${message}`, ...rest);
     }
 };
 
