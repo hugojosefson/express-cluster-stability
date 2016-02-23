@@ -1,5 +1,10 @@
 # Changelog for `express-cluster-stability`
 
+## v1.3.0
+
+  * **Feature:** Accept optional `masterFunction` as third argument.
+  * **Misc:** Print `logLevel` before `processName` in default logger.
+
 ## v1.2.1
 
   * **Docs:** Encourage starring in `README.md`.
