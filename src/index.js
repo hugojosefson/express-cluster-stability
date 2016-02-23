@@ -12,7 +12,7 @@ const defaultOptions = {
     logLevel: process.env.EXPRESS_CLUSTER_LOG_LEVEL || 'info'
 };
 
-const clusterStability = (workerFunction, options = {}) => {
+const clusterStability = (workerFunction, options = {}, masterFunction) => {
     if (typeof workerFunction !== 'function') {
         throw new Error('workerFunction must be supplied.');
     }
@@ -21,6 +21,9 @@ const clusterStability = (workerFunction, options = {}) => {
     effectiveOptions.log = log(effectiveOptions.logLevel, effectiveOptions.logger);
     if (cluster.isMaster) {
         require('./cluster-master')(effectiveOptions);
+        if (typeof masterFunction === 'function') {
+            masterFunction(effectiveOptions);
+        }
     } else {
         require('./cluster-worker')(workerFunction, effectiveOptions);
     }

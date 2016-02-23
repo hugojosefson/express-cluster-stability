@@ -28,4 +28,7 @@ clusterStability(({log}) => {
             console.log(`${level.toUpperCase()}: ${processName}: ${message}`, ...rest);
         }
     }
+}, ({log}) => {
+    log(`Doing some extra master work, only in the master process...`);
+    // ...
 });

@@ -60,7 +60,8 @@ clusterStability(({log}) => {
 
 ### Main function
 
-The module `express-cluster-stability` is a function which takes two arguments:
+The module `express-cluster-stability` is a function which takes one mandatory argument, and two
+optional ones:
 
   * `workerFunction` - Mandatory. Function which will be run in each worker process. Receives the
      effective options object as an argument, and MUST return a server with a `.close()` method.
@@ -80,6 +81,8 @@ The module `express-cluster-stability` is a function which takes two arguments:
     * `logger` - Function which takes a level string as argument, and returns a function which logs
       `message` and any extra arguments to that level. Default is a function which uses
       `console.log` and `console.error`; see *Full config options example* below.
+  * `masterFunction` - Optional. Function which will be run only in the master process. Receives
+     the effective options object as an argument.
 
 #### Worker function
 
@@ -168,5 +171,8 @@ clusterStability(({log}) => {
             console.log(`${level.toUpperCase()}: ${processName}: ${message}`, ...rest);
         }
     }
+}, ({log}) => {
+    log(`Doing some extra master work, only in the master process...`);
+    // ...
 });
 ```
