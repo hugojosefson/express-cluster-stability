@@ -14,7 +14,7 @@ export default ({numberOfWorkers, workerRespawnDelay, workerKillTimeout, log}) =
         if (message === 'crashing') {
             log.warn(`Worker ${worker.id} with PID ${worker.process.pid} is crashing. Disconnecting it...`);
             crashingWorkers.set(worker.id, setTimeout(() => {
-                log.warn(`Worker ${worker.id} with PID ${worker.process.pid} hasn't disconnected after ${workerKillTimeout} milliseconds. Killing it...`);
+                log.warn(`Worker ${worker.id} with PID ${worker.process.pid} hasn't disconnected after ${workerKillTimeout} ms. Killing it...`);
                 worker.kill();
             }, workerKillTimeout));
             worker.disconnect();

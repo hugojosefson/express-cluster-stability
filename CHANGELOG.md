@@ -1,5 +1,9 @@
 # Changelog for `express-cluster-stability`
 
+## v1.3.1
+
+  * **Fix:** `workerFunction` is not required to return a server.
+
 ## v1.3.0
 
   * **Feature:** Accept optional `masterFunction` as third argument.

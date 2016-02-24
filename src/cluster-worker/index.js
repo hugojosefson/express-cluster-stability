@@ -4,6 +4,6 @@ export default (workerFunction, options) => {
     const server = workerFunction(options);
 
     if (options.handleUncaughtException) {
-        process.on('uncaughtException', uncaughtExceptionHandler(server, options.log));
+        process.on('uncaughtException', uncaughtExceptionHandler(options, server));
     }
 };

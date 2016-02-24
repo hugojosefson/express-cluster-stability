@@ -64,7 +64,9 @@ The module `express-cluster-stability` is a function which takes one mandatory a
 optional ones:
 
   * `workerFunction` - Mandatory. Function which will be run in each worker process. Receives the
-     effective options object as an argument, and MUST return a server with a `.close()` method.
+     effective options object as an argument, and SHOULD return a server with a `.close()` method.
+     If it returns a server with a `.close()` method, `express-cluster-stability` can use it to
+     close down even more gracefully if an `uncaughtexception` occurs in a worker.
   * `options` - Optional. Object with configuration options to override:
     * `logLevel` - Minimum log level to process. Default is environment variable
        `EXPRESS_CLUSTER_NUMBER_OF_WORKERS`, or `info`.
