@@ -1,5 +1,9 @@
 # Changelog for `express-cluster-stability`
 
+## v1.3.2
+
+  * **Misc:** Enforce correct argument types.
+
 ## v1.3.1
 
   * **Fix:** `workerFunction` is not required to return a server.

@@ -14,7 +14,15 @@ const defaultOptions = {
 
 const clusterStability = (workerFunction, options = {}, masterFunction) => {
     if (typeof workerFunction !== 'function') {
-        throw new Error('workerFunction must be supplied.');
+        throw new Error('workerFunction must be supplied as the first argument.');
+    }
+    if (typeof options !== 'object') {
+        throw new Error('The second argument, if supplied, must be an options object or null.');
+    } else if (options !== null && typeof options === 'object' && typeof options.length !== 'undefined') {
+        throw new Error('The second argument, if supplied, must be an options object or null.');
+    }
+    if (typeof masterFunction !== 'undefined' && typeof masterFunction !== 'function') {
+        throw new Error('The third argument, if supplied, must be the masterFunction.');
     }
 
     const effectiveOptions = Object.assign({}, defaultOptions, options);
