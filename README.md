@@ -69,7 +69,7 @@ optional ones:
      close down even more gracefully if an `uncaughtexception` occurs in a worker.
   * `options` - Optional. Object with configuration options to override:
     * `logLevel` - Minimum log level to process. Default is environment variable
-       `EXPRESS_CLUSTER_NUMBER_OF_WORKERS`, or `info`.
+       `EXPRESS_CLUSTER_LOG_LEVEL`, or `info`.
     * `numberOfWorkers` - How many worker processes to spin up. Default is environment variable
        `EXPRESS_CLUSTER_NUMBER_OF_WORKERS`, or the number of CPU cores on the server.
     * `handleUncaughtException` - Whether to handle `uncaughtexception` in the workers, disconnect
