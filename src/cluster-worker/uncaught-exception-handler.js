@@ -1,20 +1,28 @@
 import cluster from 'cluster';
+import closeServerOrKillProcess from './close-server-or-kill-process';
 
-export default ({log, workerKillTimeout}, server) => err => {
-    process.send('crashing');
-    cluster.worker.disconnect();
-    log.fatal('uncaughtException', err);
-    if (server && typeof server.close === 'function') {
-        server.close(err => {
-            if (err) {
-                log.error('Could not close express app', err);
-                process.exit(2);
+export default (options, serverOrPromise) => {
+    const {log} = options;
+    let isAlreadyCrashing = false;
+    let server;
+
+    if (serverOrPromise && typeof serverOrPromise.then === 'function') {
+        serverOrPromise.then(actualServer => {
+            if (isAlreadyCrashing) {
+                closeServerOrKillProcess(options, actualServer);
             } else {
-                process.exit(1);
+                server = actualServer;
             }
         });
     } else {
-        log.warn(`No server with .close() method was returned from workerFunction. Exiting anyway in ${workerKillTimeout} ms...`);
-        setTimeout(() => process.exit(1), workerKillTimeout);
+        server = serverOrPromise;
     }
+
+    return err => {
+        process.send('crashing');
+        cluster.worker.disconnect();
+        log.fatal('uncaughtException', err);
+        isAlreadyCrashing = true;
+        closeServerOrKillProcess(options, server);
+    };
 };

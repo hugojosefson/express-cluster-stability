@@ -1,5 +1,9 @@
 # Changelog for `express-cluster-stability`
 
+## v1.4.0
+
+  * **Feature:** Allow `workerFunction` to return `Promise` for server.
+
 ## v1.3.2
 
   * **Misc:** Enforce correct argument types.

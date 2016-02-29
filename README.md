@@ -66,7 +66,9 @@ optional ones:
   * `workerFunction` - Mandatory. Function which will be run in each worker process. Receives the
      effective options object as an argument, and SHOULD return a server with a `.close()` method.
      If it returns a server with a `.close()` method, `express-cluster-stability` can use it to
-     close down even more gracefully if an `uncaughtexception` occurs in a worker.
+     close down even more gracefully if an `uncaughtexception` occurs in a worker. Instead of the
+     server instance, it may return a `Promise` which resolves to a server with a `.close()`
+     method.
   * `options` - Optional. Object with configuration options to override:
     * `logLevel` - Minimum log level to process. Default is environment variable
        `EXPRESS_CLUSTER_LOG_LEVEL`, or `info`.
