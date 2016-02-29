@@ -3,6 +3,7 @@
 ## v1.4.0
 
   * **Feature:** Allow `workerFunction` to return `Promise` for server.
+  * **Feature:** Allow `masterFunction` to return `Promise`, to delay initial workers.
 
 ## v1.3.2
 

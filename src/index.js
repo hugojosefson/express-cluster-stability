@@ -28,10 +28,7 @@ const clusterStability = (workerFunction, options = {}, masterFunction) => {
     const effectiveOptions = Object.assign({}, defaultOptions, options);
     effectiveOptions.log = log(effectiveOptions.logLevel, effectiveOptions.logger);
     if (cluster.isMaster) {
-        require('./cluster-master')(effectiveOptions);
-        if (typeof masterFunction === 'function') {
-            masterFunction(effectiveOptions);
-        }
+        require('./cluster-master')(masterFunction, effectiveOptions);
     } else {
         require('./cluster-worker')(workerFunction, effectiveOptions);
     }

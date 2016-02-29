@@ -1,7 +1,9 @@
 import cluster from 'cluster';
 import queueFactory from './queue-factory';
 
-export default ({numberOfWorkers, workerRespawnDelay, workerKillTimeout, log}) => {
+export default (masterFunction, options) => {
+    const {numberOfWorkers, workerRespawnDelay, workerKillTimeout, log} = options;
+
     const queue = queueFactory(workerRespawnDelay);
 
     /**
@@ -44,8 +46,21 @@ export default ({numberOfWorkers, workerRespawnDelay, workerKillTimeout, log}) =
         }
     });
 
-    // Fork workers.
-    for (var i = 0; i < numberOfWorkers; i++) {
-        forkNewWorkerNow();
+    const forkInitialWorkers = () => {
+        for (var i = 0; i < numberOfWorkers; i++) {
+            forkNewWorkerNow();
+        }
+    };
+
+    if (typeof masterFunction === 'function') {
+        const masterResult = masterFunction(options);
+        if (masterResult && typeof masterResult.then === 'function') {
+            masterResult.then(forkInitialWorkers);
+        } else {
+            forkInitialWorkers();
+        }
+    } else {
+        forkInitialWorkers();
     }
+
 };

@@ -86,7 +86,8 @@ optional ones:
       `message` and any extra arguments to that level. Default is a function which uses
       `console.log` and `console.error`; see *Full config options example* below.
   * `masterFunction` - Optional. Function which will be run only in the master process. Receives
-     the effective options object as an argument.
+     the effective options object as an argument. May return a `Promise`, which will delay forking
+     of worker processes until it resolves.
 
 #### Worker function
 
