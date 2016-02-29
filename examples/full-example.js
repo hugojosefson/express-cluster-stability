@@ -10,6 +10,7 @@ clusterStability(({log}) => {
 
     const app = express();
     app.get('/', (req, res) => res.send(`Hello world. This is worker ${cluster.worker.id}.\n`));
+    app.get('/crash', () => setTimeout(() => crashOnPurposeAsdasd(), 1));
 
     const port = process.env.PORT || 8000;
     return app.listen(port, () => {
@@ -30,5 +31,10 @@ clusterStability(({log}) => {
     }
 }, ({log}) => {
     log(`Doing some extra master work, only in the master process...`);
-    // ...
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            log(`...before workers are allowed to start forking.`);
+            resolve();
+        }, 3000);
+    });
 });
