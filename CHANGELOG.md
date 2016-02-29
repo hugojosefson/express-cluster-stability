@@ -4,6 +4,7 @@
 
   * **Feature:** Allow `workerFunction` to return `Promise` for server.
   * **Feature:** Allow `masterFunction` to return `Promise`, to delay initial workers.
+  * **Fix:** The server closing fast is not an error.
   * **Docs:** Correct `logLevel` env variable.
 
 ## v1.3.2
