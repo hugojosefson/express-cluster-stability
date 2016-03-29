@@ -55,7 +55,12 @@ export default (masterFunction, options) => {
     if (typeof masterFunction === 'function') {
         const masterResult = masterFunction(options);
         if (masterResult && typeof masterResult.then === 'function') {
-            masterResult.then(forkInitialWorkers);
+            masterResult
+                .then(forkInitialWorkers)
+                .catch(reason => {
+                    log.fatal(reason);
+                    process.exit(1);
+                });
         } else {
             forkInitialWorkers();
         }

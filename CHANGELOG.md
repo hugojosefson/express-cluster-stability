@@ -1,5 +1,9 @@
 # Changelog for `express-cluster-stability`
 
+## v1.4.1
+
+  * **Fix:** Handle Promise rejection from master function; quit with exit code 1.
+
 ## v1.4.0
 
   * **Feature:** Allow `workerFunction` to return `Promise` for server.
