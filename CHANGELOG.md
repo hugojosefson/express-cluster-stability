@@ -3,6 +3,8 @@
 ## v1.4.1
 
   * **Fix:** Handle Promise rejection from master function; quit with exit code 1.
+  * **Fix:** Load environment variables on use, rather than on load. Allows using
+  [dotenv](https://www.npmjs.com/package/dotenv) for configuration.
 
 ## v1.4.0
 

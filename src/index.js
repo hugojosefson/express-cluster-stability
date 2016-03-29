@@ -4,13 +4,13 @@ import os from 'os';
 import processName from './process-name';
 import log from './log-factory';
 
-const defaultOptions = {
+const calculateOptions = options => Object.assign({
     numberOfWorkers: process.env.EXPRESS_CLUSTER_NUMBER_OF_WORKERS || os.cpus().length,
     handleUncaughtException: process.env.EXPRESS_CLUSTER_HANDLE_UNCAUGHT_EXCEPTION !== 'false',
     workerRespawnDelay: process.env.EXPRESS_CLUSTER_WORKER_RESPAWN_DELAY || 1000,
     workerKillTimeout: process.env.EXPRESS_CLUSTER_WORKER_KILL_TIMEOUT || 30000,
     logLevel: process.env.EXPRESS_CLUSTER_LOG_LEVEL || 'info'
-};
+}, options);
 
 const clusterStability = (workerFunction, options = {}, masterFunction) => {
     if (typeof workerFunction !== 'function') {
@@ -25,7 +25,7 @@ const clusterStability = (workerFunction, options = {}, masterFunction) => {
         throw new Error('The third argument, if supplied, must be the masterFunction.');
     }
 
-    const effectiveOptions = Object.assign({}, defaultOptions, options);
+    const effectiveOptions = calculateOptions(options);
     effectiveOptions.log = log(effectiveOptions.logLevel, effectiveOptions.logger);
     if (cluster.isMaster) {
         require('./cluster-master')(masterFunction, effectiveOptions);
@@ -34,6 +34,6 @@ const clusterStability = (workerFunction, options = {}, masterFunction) => {
     }
 };
 clusterStability.processName = processName;
-clusterStability.log = log(defaultOptions.logLevel);
+clusterStability.log = log(calculateOptions().logLevel);
 
 export default clusterStability;
