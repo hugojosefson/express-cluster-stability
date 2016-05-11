@@ -47,7 +47,7 @@ export default (masterFunction, options) => {
     });
 
     const forkInitialWorkers = () => {
-        for (var i = 0; i < numberOfWorkers; i++) {
+        for (let i = 0; i < numberOfWorkers; i++) {
             forkNewWorkerNow();
         }
     };
