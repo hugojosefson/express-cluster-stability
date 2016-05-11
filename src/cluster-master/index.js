@@ -58,7 +58,7 @@ export default (masterFunction, options) => {
             masterResult
                 .then(forkInitialWorkers)
                 .catch(reason => {
-                    log.fatal(reason);
+                    log.fatal('masterFunctionException', reason);
                     process.exit(1);
                 });
         } else {

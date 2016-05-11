@@ -1,5 +1,9 @@
 # Changelog for `express-cluster-stability`
 
+## v1.4.2
+
+  * **Misc:** For consistency, always log a `string` and an optional `Error`.
+
 ## v1.4.1
 
   * **Fix:** Handle Promise rejection from master function; quit with exit code 1.
