@@ -1,5 +1,7 @@
 # express-cluster-stability
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/hugojosefson/express-cluster-stability.svg)](https://greenkeeper.io/)
+
 Stability and multi-core performance for your Express app, via the built-in stable Node.js
 [cluster](https://nodejs.org/api/cluster.html#cluster_cluster) API.
 
