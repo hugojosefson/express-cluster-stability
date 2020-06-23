@@ -18,7 +18,7 @@ const calculateOptions = options => ({
 export { processName }
 export const log = logFactory(calculateOptions().logLevel)
 
-export default (workerFunction, options = {}, masterFunction) => {
+export default async (workerFunction, options = {}, masterFunction) => {
   if (typeof workerFunction !== 'function') {
     throw new Error('workerFunction must be supplied as the first argument.')
   }
@@ -50,12 +50,10 @@ export default (workerFunction, options = {}, masterFunction) => {
     effectiveOptions.logger
   )
   if (cluster.isMaster) {
-    import('./cluster-master/index.mjs').then(({ default: clusterMaster }) =>
-      clusterMaster(masterFunction, effectiveOptions)
-    )
+    const clusterMaster = (await import('./cluster-master/index.mjs')).default
+    clusterMaster(masterFunction, effectiveOptions)
   } else {
-    import('./cluster-worker/index.mjs').then(({ default: clusterWorker }) =>
-      clusterWorker(workerFunction, effectiveOptions)
-    )
+    const clusterWorker = (await import('./cluster-worker/index.mjs')).default
+    clusterWorker(workerFunction, effectiveOptions)
   }
 }
