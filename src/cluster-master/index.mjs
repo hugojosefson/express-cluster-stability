@@ -60,11 +60,8 @@ export default (masterFunction, options) => {
     }
   })
 
-  const forkInitialWorkers = () => {
-    for (let i = 0; i < numberOfWorkers; i++) {
-      forkNewWorkerNow()
-    }
-  }
+  const forkInitialWorkers = () =>
+    Array.from({ length: numberOfWorkers }).forEach(forkNewWorkerNow)
 
   if (typeof masterFunction === 'function') {
     const masterResult = masterFunction(options)
