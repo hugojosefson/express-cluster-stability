@@ -1,5 +1,5 @@
 import express from 'express'
-import clusterStability from '../lib'
+import clusterStability from '../src/index.mjs'
 
 clusterStability(({ log }) => {
   const app = express()
