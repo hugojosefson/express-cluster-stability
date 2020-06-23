@@ -24,7 +24,7 @@ export default (workerFunction, options = {}, masterFunction) => {
   }
   if (typeof options !== 'object') {
     throw new Error(
-      'The second argument, if supplied, must be an options object or null.'
+      'The second argument, if supplied, must be an options object, null or undefined.'
     )
   } else if (
     options !== null &&
