@@ -63,17 +63,19 @@ export default (masterFunction, options) => {
   const forkInitialWorkers = () =>
     Array.from({ length: numberOfWorkers }).forEach(forkNewWorkerNow)
 
-  if (typeof masterFunction === 'function') {
-    const masterResult = masterFunction(options)
-    if (masterResult && typeof masterResult.then === 'function') {
-      masterResult.then(forkInitialWorkers).catch(reason => {
-        log.fatal('masterFunctionException', reason)
-        process.exit(1)
-      })
-    } else {
-      forkInitialWorkers()
-    }
-  } else {
+  if (typeof masterFunction !== 'function') {
     forkInitialWorkers()
+    return
   }
+
+  const masterResult = masterFunction(options)
+  if (masterResult && typeof masterResult.then === 'function') {
+    masterResult.then(forkInitialWorkers).catch(reason => {
+      log.fatal('masterFunctionException', reason)
+      process.exit(1)
+    })
+    return
+  }
+
+  forkInitialWorkers()
 }
