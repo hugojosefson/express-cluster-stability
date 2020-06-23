@@ -1,8 +1,7 @@
 import cluster from 'cluster'
 import os from 'os'
-
-import processName from './process-name.mjs'
 import logFactory from './log-factory.mjs'
+export { default as processName } from './process-name.mjs'
 
 const calculateOptions = options => ({
   numberOfWorkers:
@@ -15,7 +14,6 @@ const calculateOptions = options => ({
   ...options,
 })
 
-export { processName }
 export const log = logFactory(calculateOptions().logLevel)
 
 export default async (workerFunction, options = {}, masterFunction) => {
