@@ -1,7 +1,6 @@
 /node_modules/
-/.idea/
+/cjs/
 /*.log
+/*.tgz
 .*.swp
-
-/lib/
-/examples-es5/
+/.idea/

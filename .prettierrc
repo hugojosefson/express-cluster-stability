@@ -1,0 +1,6 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "proseWrap": "always",
+  "arrowParens": "avoid"
+}
