@@ -54,7 +54,7 @@ export default (masterFunction, options) => {
     if (crashingWorkers.has(worker.id)) {
       clearTimeout(crashingWorkers.get(worker.id))
       crashingWorkers.delete(worker.id)
-      // already forked when putting it in crashingWorkers, so not forking another one.
+      // already forked when putting it in crashingWorkers, so not forking another one now.
     } else {
       forkNewWorker()
     }
