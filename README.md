@@ -164,7 +164,7 @@ implementation is shown in this exampe.
 import os from 'os'
 import cluster from 'cluster'
 import express from 'express'
-import clusterStability, { processName } from '../src/index.mjs'
+import clusterStability, { processName } from 'express-cluster-stability'
 
 clusterStability(
   ({ log }) => {
