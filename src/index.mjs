@@ -14,7 +14,11 @@ const calculateOptions = options => ({
   logLevel: process.env.EXPRESS_CLUSTER_LOG_LEVEL || 'info',
   ...options,
 })
-const clusterStability = (workerFunction, options = {}, masterFunction) => {
+
+export { processName }
+export const log = logFactory(calculateOptions().logLevel)
+
+export default (workerFunction, options = {}, masterFunction) => {
   if (typeof workerFunction !== 'function') {
     throw new Error('workerFunction must be supplied as the first argument.')
   }
@@ -55,7 +59,3 @@ const clusterStability = (workerFunction, options = {}, masterFunction) => {
     )
   }
 }
-
-export default clusterStability
-export { processName }
-export const log = logFactory(calculateOptions().logLevel)
