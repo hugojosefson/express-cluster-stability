@@ -158,7 +158,7 @@ from the exported `processName` in `express-cluster-stability`.
 
 `logger` is a function which takes a level string as argument, and returns a
 function which logs `message` and any extra arguments to that level. The default
-implementation is shown in this exampe.
+implementation is shown in this example.
 
 ```js
 import os from 'os'
