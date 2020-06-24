@@ -2,22 +2,20 @@
   "name": "express-cluster-stability",
   "version": "1.4.2",
   "description": "Stability and multi-core performance for your Express app, via the built-in stable Node.js cluster API.",
-  "main": "./cjs/index.js",
+  "main": "./cjs/src/index.js",
   "module": "./src/index.mjs",
   "files": [
     "src",
-    "cjs",
+    "cjs/src",
     "package.json",
     "yarn.lock",
     "README.md"
   ],
   "scripts": {
-    "start": "src/cli.mjs",
-    "prepare": "npm-run-all build-cjs lint-readme",
-    "build-cjs": "rollup src/index.mjs --dir cjs --preserveModules --entryFileNames '[name].js' --format cjs --exports named --outro 'if(exports.default){Object.assign(exports.default,exports);module.exports=exports.default}'",
+    "prepare": "run-s build-cjs",
+    "build-cjs": "rollup src/index.mjs examples/*.mjs --dir cjs --preserveModules --entryFileNames '[name].js' --format cjs --exports named --outro 'if(exports.default&&[\"object\",\"function\"].includes(typeof exports.default)){Object.assign(exports.default,exports);exports.default.default=module.exports=exports.default}'",
     "lint": "prettier --write '{src,test,examples}/**/*.{js,mjs,md}' './*.{js,mjs,md}'",
-    "lint-readme": "prettier --write README.md",
-    "test": "npm-run-all lint lint-readme mocha",
+    "test": "run-s lint mocha",
     "mocha": "mocha",
     "npm-audit": "npm install --package-lock-only && npm audit; rm package-lock.json"
   },

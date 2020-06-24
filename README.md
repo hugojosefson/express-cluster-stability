@@ -15,7 +15,7 @@ when you need it.
 
 ## Prerequisites
 
-- Node.js 13.2.0 or later; install via [nvm](https://github.com/nvm-sh/nvm).
+- Node.js >=13.2.0; install via [nvm](https://github.com/nvm-sh/nvm).
 
 _(`express-cluster-stability@1` is compatible with Node.js >=4.0.0, if you need
 that.)_
