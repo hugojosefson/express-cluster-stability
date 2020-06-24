@@ -1,5 +1,9 @@
 # Changelog for `express-cluster-stability`
 
+## v3.0.0
+
+- **BREAKING:** Remove common-js, now only a module.
+
 ## v2.0.0
 
 - **Misc:** Upgrade build and code structure.
