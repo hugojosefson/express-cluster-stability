@@ -2,18 +2,16 @@
   "name": "express-cluster-stability",
   "version": "2.0.0",
   "description": "Stability and multi-core performance for your Express app, via the built-in stable Node.js cluster API.",
-  "main": "./cjs/src/index.js",
-  "module": "./src/index.mjs",
+  "type": "module",
+  "main": "./src/index.mjs",
   "files": [
     "src",
-    "cjs/src",
     "package.json",
     "yarn.lock",
     "README.md"
   ],
   "scripts": {
-    "prepare": "run-s build-cjs",
-    "build-cjs": "rollup src/index.mjs examples/*.mjs --dir cjs --preserveModules --entryFileNames '[name].js' --format cjs --exports named --outro 'if(exports.default&&[\"object\",\"function\"].includes(typeof exports.default)){Object.assign(exports.default,exports);exports.default.default=module.exports=exports.default}'",
+    "prepare": "run-s lint",
     "lint": "prettier --write '{src,test,examples}/**/*.{js,mjs,md}' './*.{js,mjs,md}'",
     "test": "run-s lint mocha",
     "mocha": "mocha",
@@ -60,8 +58,7 @@
     "lint-staged": "^10.2.2",
     "mocha": "^7.2.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.0.5",
-    "rollup": "^2.13.1"
+    "prettier": "^2.0.5"
   },
   "engines": {
     "node": ">=13.2.0"
