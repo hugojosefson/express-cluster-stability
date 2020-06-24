@@ -15,7 +15,7 @@
     "start": "src/cli.mjs",
     "prepare": "npm-run-all build-cjs lint-readme",
     "build-cjs": "rollup src/index.mjs --dir cjs --preserveModules --entryFileNames '[name].js' --format cjs --exports named --outro 'if(exports.default){Object.assign(exports.default,exports);module.exports=exports.default}'",
-    "lint": "prettier --write '{src,test,example}/**/*.{js,mjs,md}' './*.{js,mjs,md}'",
+    "lint": "prettier --write '{src,test,examples}/**/*.{js,mjs,md}' './*.{js,mjs,md}'",
     "lint-readme": "prettier --write README.md",
     "test": "npm-run-all lint lint-readme mocha",
     "mocha": "mocha",
